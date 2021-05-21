@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+html(lang='es')
+    head
+        include partials/header
+        link(rel="stylesheet", href="/awesome-notifications/dist/style.css")
+        script(src='/awesome-notifications/dist/index.var.js')
+        script(src='/js/funciones/notificaciones.js')
+        //-script(src='/js/funciones/autorizacion.js' type='module')
+    body.login
+        .contenedor-formulario
+            br
+            img#logo(src='/images/logo.png')
+            h1= nombrePagina
+            
+            form#formulario.caja.caja-login(method='POST' action='/iniciar-sesion')
+                .campo
+                    label(for='email') E-mail
+                    input(type='email' name='email' placeholder='Tú email' value=email)
+                
+                .campo
+                    label(for='password') Password
+                    input(type='password' name='password' placeholder='Tú password' value=password)
+
+                .campo.enviar
+                    input#enviar.boton(type='submit' value='Iniciar sesión')
+                
+                .campo.acciones  
+                    a(href='/crear-cuenta') Crear cuenta
+                    a(href='/resetPassword') Olvide contraseña
+        
+
+      
+        
+
+        if mensajes 
+                .alertas
+                    script. 
+                        console.log(!{JSON.stringify(locals.mensajes)})
+                        correcto(!{JSON.stringify(mensajes.correcto)})
+               
+        
+        //- if locals.mensajes 
+        //-         .alertas
+        //-             script. 
+        //-                 //-console.log(!{JSON.stringify(locals.mensajes)})
+        //-                 alerta(!{JSON.stringify(locals.mensajes)})
+
+    //-Ejecuta los script de la vista
+    script(src='/dist/bundle.js')

@@ -1,0 +1,80 @@
+extends layout
+
+block contenido
+    .contenido-principal
+        h1 #{nombreProyecto}
+        h2 #{nombrePagina}
+
+        //- pre #{vardump(tarea)}
+        
+        //Formulario
+        form.agregar-proyecto(action=`/editar-tarea/${tarea.id}` method='POST')
+            .campo
+                label(for='tarea') Tarea:
+                input.nombre-tarea(type='text' name='tarea' placeholder='Nombre tarea' value=tarea.tarea)
+
+            .campo    
+                label(for='descripcion') Descripción:
+                textarea.nombre-tarea(type='text' name='descripcion' placeholder='Descripción del proyecto' maxlength="255" ) #{tarea.descripcion}
+            
+            
+            .campo
+                //- pre #{vardump(usuarios)}
+                label(for='usuarioId') Asingnar a:
+                select(name='usuarioId' id='usuarioId')
+                    //- option(value='0' , selected='') Selección
+                    each usuario in usuarios
+                        if tarea.usuarioId == usuario.id
+                            option(value = usuario.id , selected='') #{usuario.nombre}
+                        else
+                            option(value = usuario.id) #{usuario.nombre}
+            
+            .campo.enviar   
+                input.boton.nueva-tarea(type='submit' value='Guardar')
+
+        //Listado de tareas pendientes
+
+        //- pre #{vardump(proyecto)}
+        //-pre #{vardump(tareas)}
+
+        //- .listado-pendientes
+        //-     ul  
+        //-         if tareas.length
+        //-             each tarea in tareas        
+        //-                 //-pre #{vardump(tarea)}
+        //-                 li.tarea(data-tarea = tarea.id data-descripcion = tarea.descripcion data-usuarioid = tarea.usuario.id)
+        //-                     p= tarea.tarea
+
+        //-                     .campo.acciones
+        //-                         i= tarea.usuario.nombre + ' ' + tarea.usuario.apellidos
+
+        //-                         if !tarea.estado
+        //-                             i.fas.fa-mug-hot.estado.enProceso
+        //-                         else
+        //-                             i.far.fa-check-circle.estado.completo
+
+        //-                         i.fas.fa-info-circle.tooltip
+        //-                             span.tooltiptext= tarea.descripcion
+
+        //-                         i.fas.fa-pencil-alt
+
+        //-                         i.fas.fa-trash-alt
+
+        //-         else
+        //-             p No hay tareas en este proyecto.
+                        
+
+        //- //Avance del proyecto
+        //- .avance 
+        //-     h2 Avance del proyecto
+        //-     #barra-avance.barra-avance  
+        //-         #porcentaje.porcentaje.animate
+
+        //- //Acciones del formulario
+
+        //- .contenedor-acciones
+        //-     a(href=`/proyecto/editar/${proyecto.id}` class='boton') Editar Proyecto
+        //-     button#eliminar-proyecto(data-proyecto-url = proyecto.url 
+        //-                                 data-proyecto-name = proyecto.nombre 
+        //-                                 type='button' class = 'boton eliminar') Eliminar proyecto
+

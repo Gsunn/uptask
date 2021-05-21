@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+html(lang="es")
+    head
+        include partials/header
+        link(rel="stylesheet", href="/awesome-notifications/dist/style.css")
+        script(src='/awesome-notifications/dist/index.var.js')
+        script(src='/js/funciones/notificaciones.js')
+        //- script(src='/js/funciones/test.js' type='module')
+    body.login
+        .contenedor-formulario
+            br
+            img#logo(src='/images/logo.png')
+            h1= nombrePagina
+
+            form#formulario.caja.caja-login(method='POST' action='/crear-cuenta')
+                .campo
+                    label(for='nombre') Nombre
+                    input(type='text' name='nombre' placeholder='Tú nombre' value=nombre)
+                
+                .campo
+                    label(for='apellidos') Apellidos
+                    input(type='text' name='apellidos' placeholder='Tus apellidos' value=apellidos)
+
+                .campo
+                    label(for='email') E-mail
+                    input(type='email' name='email' placeholder='Tú email' value=email)
+                
+                .campo
+                    label(for='password') Password
+                    input(type='password' name='password' placeholder='Tú password' value=password)
+
+                .campo.enviar
+                    input#enviar.boton(type='submit' value='Crear cuenta')
+                
+                .campo  
+                    a(href='/iniciar-sesion') Volver a Iniciar sesión
+
+
+        if locals.mensajes 
+                .alertas
+                    script. 
+                        //-console.log(!{JSON.stringify(locals.mensajes)})
+                        alerta(!{JSON.stringify(locals.mensajes)})
+
+                    //- each categoria in Object.keys(locals.mensajes)
+                    //-     each error in mensajes[categoria]
+                                //- .alerta(class=`${categoria}`)
+                                //-span= error  
+                                //- script. 
+                                //-     console.log(!{JSON.stringify(error)})
+                                //-     alerta(!{JSON.stringify(error)})
+       
+        script(src='/dist/bundle.js')
+        

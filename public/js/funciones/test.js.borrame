@@ -1,0 +1,37 @@
+// import AWN from '../../../node_modules/awesome-notifications'
+
+// //Set global options
+const globalOptions =  {
+    position: "top-right",
+    durations: {
+        global: 3000,
+        success: null,
+        info: null,
+        tip: null,
+        warning: null,
+        alert: null
+      },
+  }
+//   // Initialize instance of AWN
+const notifier = new AWN(globalOptions)
+
+const alerta = (msg)=>{
+
+    if(msg.error){
+        console.log(msg)
+        let listView = '<ul>'
+    
+        for (let i = 0; i < msg.error.length; i++){
+            //console.log(msg.error[i]);
+            listView += '<li>' + msg.error[i] + '</li>'
+    
+        }
+    
+        listView += '<ul>'
+        //console.log(listView);
+        //notifier.async()
+        notifier.alert(listView)
+    }
+
+}
+
